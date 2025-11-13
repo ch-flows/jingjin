@@ -1,0 +1,2118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.1, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover" />
+  <title>华文表达精进卡</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.cn/css2?family=Noto+Serif+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #667eea;
+      --primary-dark: #5a67d8;
+      --primary-light: #a3bffa;
+      --secondary: #ed8936;
+      --accent: #48bb78;
+      --text-primary: #2d3748;
+      --text-secondary: #718096;
+      --bg-primary: #ffffff;
+      --bg-secondary: #f7fafc;
+      --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px rgba(0,0,0,0.07), 0 1px 3px rgba(0,0,0,0.06);
+      --shadow-lg: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05);
+      --shadow-xl: 0 20px 25px rgba(0,0,0,0.15), 0 10px 10px rgba(0,0,0,0.04);
+      --radius: 24px;
+      --radius-sm: 16px;
+      --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --english-color: #4A1D96;
+      --dark-blue: #1e3a8a;
+      --light-blue: #3b82f6;
+      --error-color: #dc2626;
+      --correct-color: #059669;
+      --dark-green: #047857;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    html {
+      height: 100%;
+      width: 100%;
+      overflow: auto;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    body {
+      min-height: 100%;
+      width: 100%;
+      background: var(--bg-gradient);
+      color: var(--text-primary);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      overflow-x: hidden;
+      touch-action: manipulation;
+      font-family: 'Noto Serif SC', serif;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+      -webkit-overflow-scrolling: touch;
+      position: relative;
+      min-width: 0;
+    }
+
+    /* 固定的背景层 - 防止缩放时变白 */
+    .background-fixed {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        linear-gradient(135deg, #667eea 0%, #764ba2 100%),
+        radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
+      z-index: -2;
+      pointer-events: none;
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 480px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      min-height: auto;
+      height: auto;
+      flex: 0 1 auto;
+      margin: auto;
+      position: relative;
+      touch-action: pan-y pinch-zoom;
+      min-width: 0;
+      transform-origin: center center;
+      transition: transform 0.3s ease;
+      background: transparent;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 8px;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .header-content {
+      padding: 8px;
+    }
+
+    .logo {
+      font-size: 34px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #ffffff 0%, #f0f4ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.5px;
+      text-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      font-family: 'Noto Serif SC', serif;
+      margin-bottom: 4px;
+    }
+
+    .subtitle {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      font-family: 'Noto Serif SC', serif;
+      margin-bottom: 2px;
+    }
+
+    .dataset-selector {
+      width: 100%;
+      display: flex;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .nav-btn {
+      flex: 1;
+      height: 46px;
+      background: rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(12px);
+      border: none;
+      border-radius: var(--radius-sm);
+      color: white;
+      font-size: 20px;
+      font-weight: 400;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      box-shadow: var(--shadow-md);
+      font-family: 'Noto Serif SC', serif;
+    }
+
+    .nav-btn.active {
+      background: rgba(255, 255, 255, 0.35);
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-2px);
+    }
+
+    .nav-btn:active {
+      transform: translateY(0);
+    }
+
+    .card-container {
+      width: 100%;
+      height: 340px;
+      touch-action: pan-y pinch-zoom;
+      position: relative;
+      margin: 8px 0;
+    }
+
+    #card {
+      width: 100%;
+      height: 100%;
+      background: 
+        linear-gradient(
+          90deg, 
+          var(--primary) 0%, 
+          #7c6eea 20%, 
+          var(--secondary) 50%, 
+          #f6ad55 80%, 
+          var(--accent) 100%
+        ) top / 100% 12px no-repeat,
+        rgba(255, 255, 255, 0.96) 0% 12px / 100% calc(100% - 12px) no-repeat;
+      backdrop-filter: blur(25px);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      text-align: center;
+      box-shadow: var(--shadow-xl);
+      position: relative;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: visible;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      cursor: pointer;
+      touch-action: pan-y pinch-zoom;
+    }
+
+    #card:active {
+      transform: translateY(-3px);
+      box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-click-left, .card-click-right {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: 50%;
+      z-index: 5;
+    }
+
+    .card-click-left {
+      left: 0;
+    }
+
+    .card-click-right {
+      right: 0;
+    }
+
+    .card-star {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 24px;
+      color: var(--secondary);
+      filter: drop-shadow(0 0 15px rgba(237, 137, 54, 0.6));
+      z-index: 10;
+      padding: 8px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: var(--shadow-md);
+      pointer-events: none; /* 禁止点击卡片上的五角星 */
+    }
+
+    #card-text {
+      font-size: 28px;
+      line-height: 1.4;
+      word-break: break-word;
+      font-weight: 300;
+      color: var(--dark-blue);
+      white-space: pre-line;
+      font-family: 'Noto Serif SC', serif;
+      -webkit-user-select: text;
+      user-select: text;
+      max-width: 100%;
+    }
+
+    .card-image {
+      max-width: 50%;
+      max-height: 140px;
+      border-radius: 10px;
+      margin-bottom: 12px;
+      border: 3px solid #e2e8f0;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+      margin-top: 0;
+    }
+
+    .divider {
+      width: 85%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--primary-light), transparent);
+      margin: 20px 0;
+      border-radius: 2px;
+    }
+
+    .vertical-divider {
+      width: 2px;
+      height: 100px;
+      background: linear-gradient(to bottom, transparent, var(--primary-light), transparent);
+      margin: 0 8px;
+      border-radius: 2px;
+    }
+
+    .correct-character {
+      font-size: 80px;
+      font-weight: 700;
+      color: var(--dark-green);
+      text-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      font-family: 'Noto Serif SC', serif;
+      margin-right: 16px;
+    }
+
+    .typo-back-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      gap: 4px;
+    }
+
+    .typo-image-container, .typo-character-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
+
+    .typo-character-container {
+      margin-left: -8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sentence-container {
+      width: 100%;
+      text-align: center;
+    }
+
+    .sentence-part {
+      margin-bottom: 16px;
+    }
+
+    .sentence-label {
+      font-size: 15px;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+      font-weight: 700;
+      font-family: 'Noto Serif SC', serif;
+    }
+
+    /* 错别字和病句统一使用思源宋体，字号与例句相同 */
+    .original-sentence {
+      font-size: 22px;
+      line-height: 1.5;
+      font-family: 'Noto Serif SC', serif;
+      color: var(--error-color);
+      font-weight: 300;
+    }
+
+    .corrected-sentence {
+      font-size: 22px;
+      line-height: 1.5;
+      font-family: 'Noto Serif SC', serif;
+      color: var(--correct-color);
+      font-weight: 300;
+    }
+
+    .translation-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    .translation-main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      margin: 16px 0;
+      width: 100%;
+    }
+
+    /* 常用搭配的华文短语 - 思源宋体加粗 */
+    .chinese-text {
+      color: var(--primary-dark);
+      font-family: 'Noto Serif SC', serif;
+      font-weight: 700;
+      font-size: 24px;
+    }
+
+    .english-text {
+      color: var(--dark-blue);
+      font-family: Arial, sans-serif;
+      font-size: 28px;
+      font-weight: 300;
+    }
+
+    .english-text-back {
+      color: var(--dark-blue);
+      font-family: Arial, sans-serif;
+      font-size: 28px;
+      font-weight: 300;
+    }
+
+    .example-container {
+      width: 100%;
+      text-align: center;
+    }
+
+    /* 常用搭配例句 - 思源字体300字重 */
+    .example-text {
+      font-size: 22px;
+      color: var(--dark-blue);
+      line-height: 1.5;
+      margin-top: 12px;
+      font-style: normal;
+      font-family: 'Noto Serif SC', serif;
+      font-weight: 300;
+      padding: 0;
+    }
+
+    /* 提示文字使用思源宋体，字号与例句相同 */
+    .sentence-hint {
+      font-size: 22px;
+      color: var(--dark-blue);
+      line-height: 1.4;
+      margin-top: 12px;
+      font-style: normal;
+      font-family: 'Noto Serif SC', serif;
+      font-weight: 300;
+      padding: 0;
+    }
+
+    .typo-label {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-top: 18px;
+      font-weight: 300;
+      font-family: 'Noto Serif SC', serif;
+    }
+
+    .typo-label-right {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-top: 18px;
+      font-weight: 300;
+      font-family: 'Noto Serif SC', serif;
+    }
+
+    .example-line {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .progress-container {
+      width: 100%;
+      max-width: 400px;
+      margin: 4px 0;
+    }
+
+    #progress {
+      text-align: center;
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.95);
+      font-weight: 300;
+      margin-bottom: 8px;
+      font-family: 'Noto Serif SC', serif;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary-light) 0%, white 100%);
+      border-radius: 3px;
+      transition: width 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .progress-fill::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.7), transparent);
+      animation: shimmer 2.5s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+
+    .controls {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      position: relative;
+      margin-top: 8px;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 8px;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .btn {
+      height: 52px;
+      min-width: 52px;
+      flex: 1;
+      font-size: 14px;
+      font-weight: 700;
+      border: none;
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(15px);
+      color: white;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 
+        0 2px 10px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .btn:active {
+      transform: translateY(-2px);
+      box-shadow: 
+        0 4px 15px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-icon {
+      font-size: 20px;
+      transition: var(--transition);
+      color: rgba(255, 255, 255, 0.85);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+      background: none !important;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    /* 上一张和下一张按钮的箭头加长 */
+    .btn-primary .btn-icon {
+      font-size: 22px;
+    }
+
+    /* 重置按钮的SVG图标样式 */
+    .reset-icon-svg {
+      width: 24px;
+      height: 24px;
+      fill: rgba(255, 255, 255, 0.85);
+    }
+
+    .btn-primary {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .btn:hover .btn-icon {
+      transform: scale(1.1);
+    }
+
+    .btn:active .btn-icon {
+      transform: scale(0.95);
+    }
+
+    .copyright-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.7);
+      z-index: 5;
+      cursor: pointer;
+      transition: var(--transition);
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: none;
+      box-shadow: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      width: auto;
+      height: auto;
+      border-radius: 0;
+    }
+
+    .copyright-icon:hover {
+      color: rgba(255, 255, 255, 0.9);
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+
+    .copyright-icon:active {
+      transform: translate(-50%, -50%) scale(0.95);
+    }
+
+    .creator-info {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+      backdrop-filter: blur(10px);
+    }
+
+    .creator-info.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .creator-content {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 30px;
+      border-radius: var(--radius);
+      text-align: center;
+      box-shadow: var(--shadow-xl);
+      max-width: 80%;
+      position: relative;
+      transform: translateY(20px);
+      transition: transform 0.5s ease;
+    }
+
+    .creator-info.active .creator-content {
+      transform: translateY(0);
+    }
+
+    .creator-title {
+      font-size: 24px;
+      color: white;
+      margin-bottom: 20px;
+      font-family: 'Noto Serif SC', serif;
+    }
+
+    .creator-name {
+      font-size: 32px;
+      color: white;
+      font-weight: bold;
+      margin-bottom: 10px;
+      font-family: 'Noto Serif SC', serif;
+    }
+
+    .creator-quote {
+      font-size: 18px;
+      color: rgba(255, 255, 255, 0.9);
+      font-style: normal;
+      margin-top: 20px;
+      padding: 15px;
+      border-left: 3px solid rgba(255, 255, 255, 0.5);
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      font-family: 'Noto Serif SC', serif;
+      line-height: 1.6;
+    }
+
+    .creator-quote-english {
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.8);
+      font-style: normal;
+      margin-top: 8px;
+      font-family: 'Arial', sans-serif;
+      font-weight: 300;
+    }
+
+    .close-creator {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .close-creator:hover {
+      transform: scale(1.2);
+    }
+
+    /* 缩放控制按钮 */
+    .zoom-controls {
+      position: fixed;
+      bottom: 15px;
+      right: 15px;
+      display: flex;
+      flex-direction: row;
+      gap: 2px;
+      z-index: 1000;
+    }
+
+    .zoom-btn {
+      width: 32px;
+      height: 32px;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 20px;
+      font-weight: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .zoom-indicator {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 6px 10px;
+      border-radius: 16px;
+      font-size: 12px;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+    }
+
+    /* 响应式设计 - 手机端 */
+    @media (max-width: 480px) {
+      .app-container {
+        gap: 14px;
+      }
+      
+      .card-container {
+        height: 300px;
+      }
+      
+      #card {
+        padding: 24px 20px;
+      }
+      
+      #card-text {
+        font-size: 24px;
+      }
+      
+      .btn-row {
+        gap: 6px;
+      }
+      
+      .btn {
+        height: 48px;
+        min-width: 48px;
+      }
+      
+      .btn-icon {
+        font-size: 18px;
+        background: none !important;
+      }
+      
+      .btn-primary .btn-icon {
+        font-size: 20px;
+      }
+      
+      .dataset-selector {
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+      
+      .nav-btn {
+        min-width: 100px;
+        height: 42px;
+        font-size: 18px;
+        font-weight: 400;
+      }
+      
+      .correct-character {
+        font-size: 70px;
+      }
+      
+      .translation-main {
+        font-size: 22px;
+      }
+      
+      .chinese-text {
+        font-size: 22px;
+      }
+      
+      .english-text, .english-text-back {
+        font-size: 24px;
+      }
+      
+      .typo-back-container {
+        gap: 3px;
+      }
+      
+      .vertical-divider {
+        margin: 0 6px;
+      }
+      
+      .card-image {
+        max-width: 45%;
+        max-height: 120px;
+      }
+      
+      .original-sentence, .corrected-sentence {
+        font-size: 20px;
+      }
+      
+      .logo {
+        font-size: 28px;
+      }
+      
+      .copyright-icon {
+        font-size: 14px;
+      }
+      
+      .zoom-controls {
+        bottom: 10px;
+        right: 10px;
+      }
+      
+      .zoom-btn {
+        width: 28px;
+        height: 28px;
+        font-size: 18px;
+        font-weight: 100;
+      }
+      
+      .zoom-indicator {
+        top: 10px;
+        right: 10px;
+        font-size: 11px;
+        padding: 5px 8px;
+      }
+      
+      .example-text {
+        font-size: 20px;
+      }
+      
+      .sentence-hint {
+        font-size: 20px;
+      }
+      
+      .reset-icon-svg {
+        width: 20px;
+        height: 20px;
+      }
+      
+      /* 手机端 - 乱序按钮箭头改细 */
+      #shuffleBtn .btn-icon {
+        font-weight: 300;
+        text-shadow: none;
+      }
+      
+      /* 手机端进度条数字 */
+      #progress {
+        font-weight: 300;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .app-container {
+        gap: 12px;
+      }
+      
+      .card-container {
+        height: 280px;
+      }
+      
+      .btn {
+        height: 44px;
+        min-width: 44px;
+      }
+      
+      .btn-icon {
+        font-size: 16px;
+      }
+      
+      .btn-primary .btn-icon {
+        font-size: 18px;
+      }
+      
+      .logo {
+        font-size: 24px;
+      }
+      
+      .nav-btn {
+        font-size: 16px;
+        font-weight: 400;
+      }
+      
+      .example-text {
+        font-size: 18px;
+      }
+      
+      .sentence-hint {
+        font-size: 18px;
+      }
+      
+      .reset-icon-svg {
+        width: 18px;
+        height: 18px;
+      }
+      
+      /* 小屏幕手机端 - 乱序按钮箭头改细 */
+      #shuffleBtn .btn-icon {
+        font-weight: 300;
+        text-shadow: none;
+      }
+      
+      /* 小屏幕手机端缩放按钮 */
+      .zoom-btn {
+        font-weight: 100;
+      }
+      
+      /* 小屏幕手机端进度条数字 */
+      #progress {
+        font-weight: 300;
+      }
+    }
+
+    /* iPad 横屏和竖屏优化 */
+    @media (min-width: 768px) and (max-width: 1024px) {
+      html, body {
+        overflow: auto;
+        height: auto;
+        min-height: 100vh;
+        justify-content: flex-start;
+        padding: 15px;
+        display: flex;
+        align-items: center;
+      }
+      
+      .app-container {
+        max-width: 480px !important;
+        width: 100%;
+        padding: 15px;
+        gap: 14px;
+        transform: none !important;
+        flex: 0 1 auto;
+        margin: 0 auto;
+        min-height: auto;
+        height: auto;
+      }
+      
+      .header {
+        padding: 8px 0;
+        margin-bottom: 6px;
+        margin-top: 5px;
+      }
+      
+      .logo {
+        font-size: 34px;
+        margin-bottom: 4px;
+      }
+      
+      .subtitle {
+        font-size: 14px;
+      }
+      
+      .card-container {
+        height: 340px;
+        margin: 10px 0;
+      }
+      
+      #card {
+        padding: 28px 24px;
+      }
+      
+      #card-text {
+        font-size: 28px;
+        padding: 0 15px;
+      }
+      
+      .progress-container {
+        margin: 2px 0;
+      }
+      
+      #progress {
+        font-size: 15px;
+        margin-bottom: 6px;
+        font-weight: 300;
+      }
+      
+      .progress-bar {
+        height: 6px;
+      }
+      
+      .controls {
+        gap: 8px;
+        padding: 8px 0;
+        margin-top: 6px;
+      }
+      
+      .btn-row {
+        gap: 8px;
+      }
+      
+      .btn {
+        height: 52px;
+        min-width: 52px;
+        padding: 0;
+      }
+      
+      .btn-icon {
+        font-size: 20px;
+        background: none !important;
+      }
+      
+      .btn-primary .btn-icon {
+        font-size: 22px;
+      }
+      
+      .reset-icon-svg {
+        width: 22px;
+        height: 22px;
+      }
+      
+      .zoom-controls {
+        bottom: 15px;
+        right: 15px;
+      }
+      
+      .zoom-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 22px;
+        font-weight: 100;
+      }
+      
+      .zoom-indicator {
+        top: 15px;
+        right: 15px;
+        font-size: 14px;
+        padding: 6px 10px;
+      }
+      
+      .example-text {
+        font-size: 22px;
+      }
+      
+      .sentence-hint {
+        font-size: 22px;
+      }
+      
+      .chinese-text {
+        font-size: 24px;
+        font-weight: 700;
+        font-family: 'Noto Serif SC', serif;
+      }
+      
+      .english-text, .english-text-back {
+        font-size: 28px;
+      }
+      
+      .original-sentence, .corrected-sentence {
+        font-size: 22px;
+      }
+      
+      .correct-character {
+        font-size: 80px;
+      }
+      
+      /* iPad端 - 乱序按钮箭头改细 */
+      #shuffleBtn .btn-icon {
+        font-weight: 300;
+        text-shadow: none;
+      }
+      
+      /* iPad端导航按钮 */
+      .nav-btn {
+        font-weight: 400;
+      }
+    }
+
+    /* 大屏幕设备优化 */
+    @media (min-width: 1025px) {
+      .app-container {
+        max-width: 700px;
+        padding: 30px 40px;
+        gap: 20px;
+      }
+      
+      .header {
+        padding: 12px 0;
+        margin-bottom: 8px;
+      }
+      
+      .logo {
+        font-size: 42px;
+        margin-bottom: 8px;
+      }
+      
+      .subtitle {
+        font-size: 18px;
+      }
+      
+      .card-container {
+        height: 320px;
+        margin: 15px 0;
+      }
+      
+      #card {
+        padding: 40px 35px;
+        border-radius: 28px;
+      }
+      
+      #card-text {
+        font-size: 32px;
+        padding: 0 16px;
+      }
+      
+      .progress-container {
+        margin: 12px 0;
+      }
+      
+      #progress {
+        font-size: 18px;
+        margin-bottom: 8px;
+        font-weight: 300;
+      }
+      
+      .progress-bar {
+        height: 8px;
+      }
+      
+      .controls {
+        gap: 15px;
+        padding: 12px 0;
+        margin-top: 15px;
+      }
+      
+      .btn-row {
+        gap: 16px;
+      }
+      
+      .btn {
+        height: 68px;
+        min-width: 90px;
+        padding: 0 16px;
+        border-radius: 22px;
+      }
+      
+      .btn-icon {
+        font-size: 24px;
+      }
+      
+      .btn-primary .btn-icon {
+        font-size: 24px;
+      }
+      
+      .reset-icon-svg {
+        width: 26px;
+        height: 26px;
+      }
+      
+      .zoom-controls {
+        bottom: 20px;
+        right: 20px;
+      }
+      
+      .zoom-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 24px;
+        font-weight: 100;
+      }
+      
+      .zoom-indicator {
+        top: 20px;
+        right: 20px;
+        font-size: 16px;
+        padding: 8px 12px;
+      }
+      
+      .example-text {
+        font-size: 24px;
+      }
+      
+      .sentence-hint {
+        font-size: 24px;
+      }
+      
+      /* 电脑端 - 乱序按钮箭头改细 */
+      #shuffleBtn .btn-icon {
+        font-weight: 300;
+        text-shadow: none;
+      }
+      
+      /* 电脑端导航按钮 */
+      .nav-btn {
+        font-weight: 400;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- 固定的背景层 - 防止缩放时变白 -->
+  <div class="background-fixed"></div>
+  
+  <!-- 缩放指示器 -->
+  <div class="zoom-indicator" id="zoomIndicator">100%</div>
+  
+  <!-- 缩放控制按钮 -->
+  <div class="zoom-controls">
+    <button class="zoom-btn" id="zoomOutBtn">-</button>
+    <button class="zoom-btn" id="zoomInBtn">+</button>
+  </div>
+  
+  <!-- 设计制作信息弹窗 -->
+  <div class="creator-info" id="creatorInfo">
+    <div class="creator-content">
+      <button class="close-creator" id="closeCreator">×</button>
+      <div class="creator-title">设计制作</div>
+      <div class="creator-name">刘老师 ©</div>
+      <div class="creator-quote">
+        错误，是精进表达的开始。
+        <div class="creator-quote-english">Mistakes are the starting point for refining expression.</div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="app-container" id="appContainer">
+    <div class="header">
+      <div class="header-content">
+        <div class="subtitle">精准表达，从这里开始</div>
+        <div class="logo">华文表达精进卡</div>
+      </div>
+    </div>
+    
+    <div class="dataset-selector">
+      <button class="nav-btn active" data-set="collocations">
+        <span>常用搭配</span>
+      </button>
+      <button class="nav-btn" data-set="typos">
+        <span>错别字</span>
+      </button>
+      <button class="nav-btn" data-set="sentences">
+        <span>病句</span>
+      </button>
+    </div>
+    
+    <div class="card-container">
+      <div id="card">
+        <div class="card-click-left" id="cardLeft"></div>
+        <div class="card-click-right" id="cardRight"></div>
+        <div id="card-text">点击卡片开始学习</div>
+      </div>
+    </div>
+    
+    <div class="progress-container">
+      <div id="progress">0 / 0</div>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width: 0%"></div>
+      </div>
+    </div>
+    
+    <div class="controls">
+      <div class="copyright-icon" id="copyrightBtn">©</div>
+      <div class="btn-row">
+        <button class="btn" id="resetBtn" title="回到第一张">
+          <!-- 使用实心竖线+两个三角形的SVG图标 -->
+          <svg class="reset-icon-svg" viewBox="0 0 24 24">
+            <!-- 左边竖线 - 精确调整粗细为1px，与其他箭头横线一致 -->
+            <rect x="4" y="8" width="1" height="8" fill="currentColor"/>
+            <!-- 第一个三角形 -->
+            <polygon points="10,8 6,12 10,16" fill="currentColor"/>
+            <!-- 第二个三角形 -->
+            <polygon points="16,8 12,12 16,16" fill="currentColor"/>
+          </svg>
+        </button>
+        <button class="btn" id="shuffleBtn" title="随机排序">
+          <span class="btn-icon">⇄</span>
+        </button>
+        <button class="btn" id="starBtn" title="收藏">
+          <span class="btn-icon">★</span>
+        </button>
+        <button class="btn" id="bookmarksBtn" title="查看收藏">
+          <span class="btn-icon">🔖</span>
+        </button>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-primary" id="prevBtn" title="上一张">
+          <span class="btn-icon">←</span>
+        </button>
+        <button class="btn btn-primary" id="nextBtn" title="下一张">
+          <span class="btn-icon">→</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 常用搭配数据 - 优化例句排版
+    const collocationsData = [
+      ["conduct activities", "开展活动 | conduct activities\n────────────────────\n学生会计划下周在邻里公园，\n开展一次清洁活动。"],
+      ["hold a lecture", "举办讲座 | hold a lecture\n────────────────────\n民众俱乐部为居民举办了\n一个关于网络安全的讲座。"],
+      ["design a poster", "设计海报 | design a poster\n────────────────────\n我们的华文功课是设计海报，\n介绍新加坡的美食。"],
+      ["distribute flyers", "分发传单 | distribute flyers\n────────────────────\n我们将在地铁站外分发传单，\n邀请大家来参加学校的义卖会。"],
+      ["take measures", "采取措施 | take measures\n────────────────────\n为了预防骨痛热症，市镇理事会\n采取措施，定期清理积水。"],
+      ["achieve goals", "实现目标 | achieve goals\n────────────────────\n通过努力学习，我终于实现了目标，\n在考试中取得了好成绩。"],
+      ["learn from mistakes", "吸取教训 | learn from mistakes\n────────────────────\n我这次测验因为没复习而考得不好，\n我必须吸取教训，下次要提前准备。"],
+      ["summarize experience", "总结经验 | summarize experience\n────────────────────\n露营活动结束后，我们围坐在\n一起总结经验，分享各自的收获。"],
+      ["complete a task", "完成任务 | complete a task\n────────────────────\n我给自己设定目标，每天都要\n完成华文阅读的任务。"],
+      ["solve problems", "解决问题 | solve problems\n────────────────────\n居民可以通过市镇理事会，\n解决一些常见的社区问题。"],
+      ["overcome difficulties", "克服困难 | overcome difficulties\n────────────────────\n学习游泳时我很怕水，但在教练的\n耐心指导下，我慢慢克服了这个困难。"],
+      ["realize dreams", "实现梦想 | realize dreams\n────────────────────\n我相信只要坚持努力，\n每个人都有可能实现自己的梦想。"],
+      ["develop habits", "养成习惯 | develop habits\n────────────────────\n每天晨读十分钟，\n能帮助你养成阅读习惯。"],
+      ["cultivate talent", "培养人才 | cultivate talent\n────────────────────\n新加坡通过优质的教育体系\n来培养人才，推动国家进步。"],
+      ["adopt suggestions", "采纳建议 | adopt suggestions\n────────────────────\n这次我采纳了父母的建议，\n提前准备考试，感觉压力小了很多。"],
+      ["improve relationships", "改善关系 | improve relationships\n────────────────────\n老师经常和我们聊天，\n这有助于改善师生关系。"],
+      ["seize opportunities", "把握机会 | seize opportunities\n────────────────────\n我们应该把握中学时期的\n每一个学习机会，为未来做好准备。"],
+      ["strong interest", "浓厚的兴趣 | strong interest\n────────────────────\n看华语电视剧让我对华文\n产生了更浓厚的兴趣。"],
+      ["deep feelings", "深厚的感情 | deep feelings\n────────────────────\n我和我的婆婆有着深厚的感情，\n她常常给我讲她年轻时的故事。"],
+      ["precious friendship", "珍贵的友谊 | precious friendship\n────────────────────\n四年的中学生活让我和同学们\n建立了珍贵的友谊。"],
+      ["harmonious relationship", "融洽的关系 | harmonious relationship\n────────────────────\n我们这栋组屋的居民关系很融洽，\n经常在楼下一起聊天。"],
+      ["solid foundation", "扎实的基础 | solid foundation\n────────────────────\n学习钢琴需要有扎实的基础，\n所以要每天练习指法。"],
+      ["thorough preparation", "充分的准备 | thorough preparation\n────────────────────\n由于赛前做了充分的准备，\n我们的篮球队赢得了比赛。"],
+      ["valuable experience", "宝贵的经验 | valuable experience\n────────────────────\n假期在餐厅打工让我\n积累了宝贵的工作经验。"]
+    ];
+
+    // 错别字数据 - 修改"正确"为"改正"
+    const typosData = [
+      ["", "或", "https://i.ibb.co/6JZXrCbk/image.png"],
+      ["", "落", "https://i.ibb.co/fdyyDFny/image.png"],
+      ["", "获", "https://i.ibb.co/TBBMCCbQ/image.png"],
+      ["", "试", "https://i.ibb.co/JWw1HykT/shi1.png"],
+      ["", "腻", "https://i.ibb.co/HLqTxN94/ni1.png"],
+      ["请在说一遍。", "原句：请在说一遍。\n────────────────────\n改正：请再说一遍"],
+      ["他跑的很快。", "原句：他跑的很快。\n────────────────────\n改正：他跑得很快"],
+      ["这是谁地手机。", "原句：这是谁地手机。\n────────────────────\n改正：这是谁的手机"],
+      ["大家在开心得聊天。", "原句：大家在开心得聊天。\n────────────────────\n改正：大家在开心地聊天"],
+      ["我周末得培伴家人。", "原句：我周末得培伴家人。\n────────────────────\n改正：我周末得陪伴家人"],
+      ["陪养优秀的人才。", "原句：陪养优秀的人才。\n────────────────────\n改正：培养优秀的人才"],
+      ["导至严重的后果。", "原句：导至严重的后果。\n────────────────────\n改正：导致严重的后果"],
+      ["同过不懈的努力。", "原句：同过不懈的努力。\n────────────────────\n改正：通过不懈的努力"],
+      ["你需要马上做觉定。", "原句：你需要马上做觉定。\n────────────────────\n改正：你需要马上做决定"],
+      ["我因该提前做些准备。", "原句：我因该提前做些准备。\n────────────────────\n改正：我应该提前做些准备"],
+      ["政府将采取有效错施。", "原句：政府将采取有效错施。\n────────────────────\n改正：政府将采取有效措施"],
+      ["请提出你的建意。", "原句：请提出你的建意。\n────────────────────\n改正：请提出你的建议"],
+      ["这里很热，由其是中午。", "原句：这里很热，由其是中午。\n────────────────────\n改正：这里很热，尤其是中午"]
+    ];
+
+    // 病句数据
+    const sentencesData = [
+      ["我不够钱。", "原句：我不够钱。\n────────────────────\n改正：我的钱不够。"],
+      ["我有去过那个地方。", "原句：我有去过那个地方。\n────────────────────\n改正：我去过那个地方。"],
+      ["这个故事让我觉得很感动。", "原句：这个故事让我觉得很感动。\n────────────────────\n改正：这个故事使我很感动。"],
+      ["我不知道如果他明天会来。", "原句：我不知道如果他明天会来。\n────────────────────\n改正：我不知道他明天是否会来。"],
+      ["我们正在讨论如果应该参加这个比赛。", "原句：我们正在讨论如果应该参加这个比赛。\n────────────────────\n改正：我们正在讨论是否应该参加这个比赛。"]
+    ];
+
+    const datasets = {
+      collocations: collocationsData,
+      typos: typosData,
+      sentences: sentencesData
+    };
+
+    // 状态管理
+    let state = {
+      currentSet: 'collocations',
+      cards: [],
+      currentIndex: 0,
+      starred: new Set(),
+      isViewingStarred: false,
+      originalOrder: [],
+      previousState: null,
+      zoomLevel: 1
+    };
+
+    // 构建卡片
+    function buildCards(phrases) {
+      const cards = [];
+      for (let i = 0; i < phrases.length; i++) {
+        const phrase = phrases[i];
+        if (state.currentSet === 'typos' && phrase.length === 3) {
+          cards.push({ 
+            text: phrase[0], 
+            type: 'front', 
+            index: i, 
+            imageUrl: phrase[2], 
+            correctChar: phrase[1] 
+          });
+          cards.push({ 
+            text: phrase[1], 
+            type: 'back', 
+            index: i, 
+            imageUrl: phrase[2], 
+            correctChar: phrase[1] 
+          });
+        } else {
+          cards.push({ 
+            text: phrase[0], 
+            type: 'front', 
+            index: i 
+          });
+          cards.push({ 
+            text: phrase[1], 
+            type: 'back', 
+            index: i 
+          });
+        }
+      }
+      return cards;
+    }
+
+    // 打乱数组
+    function shuffleArray(array) {
+      const newArray = [...array];
+      for (let i = newArray.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+      }
+      return newArray;
+    }
+
+    // 更新卡片显示
+    function updateCard() {
+      if (state.cards.length === 0) {
+        document.getElementById('card-text').textContent = '没有可用卡片';
+        document.getElementById('progress').textContent = '0 / 0';
+        document.querySelector('.progress-fill').style.width = '0%';
+        return;
+      }
+
+      const card = state.cards[state.currentIndex];
+      const cardElement = document.getElementById('card');
+      
+      // 清除之前的元素
+      const elementsToRemove = [
+        '.card-image',
+        '.card-hint',
+        '.divider',
+        '.correct-character',
+        '.sentence-container',
+        '.translation-container',
+        '.example-container',
+        '.typo-back-container',
+        '.vertical-divider',
+        '.sentence-hint',
+        '.typo-label',
+        '.typo-label-right',
+        '.card-star',
+        '.example-label'
+      ];
+      
+      elementsToRemove.forEach(selector => {
+        const element = cardElement.querySelector(selector);
+        if (element) element.remove();
+      });
+      
+      // 设置卡片内容
+      if (state.currentSet === 'typos' && card.imageUrl) {
+        // 错别字图片卡片处理
+        if (card.type === 'back') {
+          const typoBackContainer = document.createElement('div');
+          typoBackContainer.className = 'typo-back-container';
+          
+          const typoImageContainer = document.createElement('div');
+          typoImageContainer.className = 'typo-image-container';
+          const img = document.createElement('img');
+          img.className = 'card-image';
+          img.src = card.imageUrl;
+          img.alt = '错别字图片';
+          typoImageContainer.appendChild(img);
+          
+          const typoLabelLeft = document.createElement('div');
+          typoLabelLeft.className = 'typo-label';
+          typoLabelLeft.textContent = '（错字）';
+          typoImageContainer.appendChild(typoLabelLeft);
+          
+          const verticalDivider = document.createElement('div');
+          verticalDivider.className = 'vertical-divider';
+          
+          const typoCharacterContainer = document.createElement('div');
+          typoCharacterContainer.className = 'typo-character-container';
+          const correctCharElement = document.createElement('div');
+          correctCharElement.className = 'correct-character';
+          correctCharElement.textContent = card.correctChar;
+          correctCharElement.style.fontFamily = "'Noto Serif SC', serif";
+          correctCharElement.style.fontWeight = '700';
+          typoCharacterContainer.appendChild(correctCharElement);
+          
+          const typoLabelRight = document.createElement('div');
+          typoLabelRight.className = 'typo-label-right';
+          typoLabelRight.textContent = '（改正）';
+          typoCharacterContainer.appendChild(typoLabelRight);
+          
+          typoBackContainer.appendChild(typoImageContainer);
+          typoBackContainer.appendChild(verticalDivider);
+          typoBackContainer.appendChild(typoCharacterContainer);
+          
+          cardElement.appendChild(typoBackContainer);
+          document.getElementById('card-text').textContent = '';
+        } else {
+          const typoContainer = document.createElement('div');
+          typoContainer.className = 'sentence-container';
+          
+          const img = document.createElement('img');
+          img.className = 'card-image';
+          img.src = card.imageUrl;
+          img.alt = '错别字图片';
+          typoContainer.appendChild(img);
+          
+          const divider = document.createElement('div');
+          divider.className = 'divider';
+          typoContainer.appendChild(divider);
+          
+          const hintText = document.createElement('div');
+          hintText.className = 'sentence-hint';
+          hintText.textContent = '💡 想一想，哪里错了？';
+          hintText.style.color = 'var(--dark-blue)';
+          hintText.style.fontFamily = "'Noto Serif SC', serif";
+          hintText.style.fontWeight = '300';
+          typoContainer.appendChild(hintText);
+          
+          cardElement.appendChild(typoContainer);
+          document.getElementById('card-text').textContent = '';
+        }
+      } else if (state.currentSet === 'typos' && !card.imageUrl) {
+        // 错别字文本卡片处理
+        if (card.type === 'back') {
+          const parts = card.text.split('\n────────────────────\n');
+          if (parts.length >= 2) {
+            const sentenceContainer = document.createElement('div');
+            sentenceContainer.className = 'sentence-container';
+            
+            const originalPart = document.createElement('div');
+            originalPart.className = 'sentence-part';
+            const originalText = document.createElement('div');
+            originalText.className = 'original-sentence';
+            
+            const originalSentence = parts[0].replace('原句：', '');
+            const correctSentence = parts[1].replace('改正：', '');
+            
+            // 找出不同的字符（别字）
+            let typoChar = '';
+            let correctChar = '';
+            for (let i = 0; i < Math.min(originalSentence.length, correctSentence.length); i++) {
+                if (originalSentence[i] !== correctSentence[i]) {
+                    typoChar = originalSentence[i];
+                    correctChar = correctSentence[i];
+                    break;
+                }
+            }
+            
+            const originalLabelSpan = document.createElement('span');
+            originalLabelSpan.textContent = '原句：';
+            originalLabelSpan.style.fontFamily = "'Noto Serif SC', serif";
+            originalLabelSpan.style.fontWeight = '700';
+            
+            const originalContentSpan = document.createElement('span');
+            let displayedOriginal = originalSentence;
+            if (typoChar) {
+                displayedOriginal = originalSentence.replace(typoChar, 
+                    `<span style="color: var(--error-color);">${typoChar}</span>`);
+            }
+            originalContentSpan.innerHTML = displayedOriginal;
+            originalContentSpan.style.fontFamily = "'Noto Serif SC', serif";
+            originalContentSpan.style.fontWeight = '300';
+            
+            originalText.appendChild(originalLabelSpan);
+            originalText.appendChild(originalContentSpan);
+            originalText.style.color = 'var(--light-blue)';
+            originalPart.appendChild(originalText);
+            sentenceContainer.appendChild(originalPart);
+            
+            const divider = document.createElement('div');
+            divider.className = 'divider';
+            sentenceContainer.appendChild(divider);
+            
+            const correctedPart = document.createElement('div');
+            correctedPart.className = 'sentence-part';
+            const correctedText = document.createElement('div');
+            correctedText.className = 'corrected-sentence';
+            
+            const correctedLabelSpan = document.createElement('span');
+            correctedLabelSpan.textContent = '改正：';
+            correctedLabelSpan.style.fontFamily = "'Noto Serif SC', serif";
+            correctedLabelSpan.style.fontWeight = '700';
+            
+            const correctedContentSpan = document.createElement('span');
+            let displayedCorrected = correctSentence;
+            if (correctChar) {
+                displayedCorrected = correctSentence.replace(correctChar, 
+                    `<span style="color: var(--error-color);">${correctChar}</span>`);
+            }
+            correctedContentSpan.innerHTML = displayedCorrected;
+            correctedContentSpan.style.fontFamily = "'Noto Serif SC', serif";
+            correctedContentSpan.style.fontWeight = '300';
+            
+            correctedText.appendChild(correctedLabelSpan);
+            correctedText.appendChild(correctedContentSpan);
+            correctedText.style.color = 'var(--dark-blue)';
+            correctedPart.appendChild(correctedText);
+            sentenceContainer.appendChild(correctedPart);
+            
+            cardElement.appendChild(sentenceContainer);
+            document.getElementById('card-text').textContent = '';
+          }
+        } else {
+          const sentenceContainer = document.createElement('div');
+          sentenceContainer.className = 'sentence-container';
+          
+          const sentence = card.text;
+          const firstLine = sentence;
+          
+          const firstLineElement = document.createElement('div');
+          firstLineElement.className = 'original-sentence';
+          firstLineElement.textContent = firstLine;
+          firstLineElement.style.color = 'var(--light-blue)';
+          firstLineElement.style.fontFamily = "'Noto Serif SC', serif";
+          firstLineElement.style.fontSize = '22px';
+          sentenceContainer.appendChild(firstLineElement);
+          
+          const divider = document.createElement('div');
+          divider.className = 'divider';
+          sentenceContainer.appendChild(divider);
+          
+          const hintText = document.createElement('div');
+          hintText.className = 'sentence-hint';
+          hintText.textContent = '💡 想一想，哪里错了？';
+          hintText.style.color = 'var(--dark-blue)';
+          hintText.style.fontFamily = "'Noto Serif SC', serif";
+          hintText.style.fontWeight = '300';
+          sentenceContainer.appendChild(hintText);
+          
+          cardElement.appendChild(sentenceContainer);
+          document.getElementById('card-text').textContent = '';
+        }
+      } else if (state.currentSet === 'sentences') {
+        // 病句卡片处理
+        if (card.type === 'back') {
+          const parts = card.text.split('\n────────────────────\n');
+          if (parts.length >= 2) {
+            const sentenceContainer = document.createElement('div');
+            sentenceContainer.className = 'sentence-container';
+            
+            const originalPart = document.createElement('div');
+            originalPart.className = 'sentence-part';
+            const originalText = document.createElement('div');
+            originalText.className = 'original-sentence';
+            originalText.style.color = 'var(--light-blue)';
+            
+            const originalContent = parts[0].replace('原句：', '');
+            
+            if (originalContent === "我们正在讨论如果应该参加这个比赛。") {
+              const firstLine = '我们正在讨论';
+              const secondLine = '如果应该参加这个比赛。';
+              
+              const originalLabelSpan = document.createElement('span');
+              originalLabelSpan.textContent = '原句：';
+              originalLabelSpan.style.fontFamily = "'Noto Serif SC', serif";
+              originalLabelSpan.style.fontWeight = '700';
+              
+              const firstLineElement = document.createElement('div');
+              firstLineElement.appendChild(originalLabelSpan);
+              firstLineElement.appendChild(document.createTextNode(firstLine));
+              firstLineElement.style.marginBottom = '5px';
+              originalText.appendChild(firstLineElement);
+              
+              const secondLineElement = document.createElement('div');
+              secondLineElement.textContent = secondLine;
+              secondLineElement.style.paddingLeft = '3em';
+              originalText.appendChild(secondLineElement);
+            } else {
+              const originalLabelSpan = document.createElement('span');
+              originalLabelSpan.textContent = '原句：';
+              originalLabelSpan.style.fontFamily = "'Noto Serif SC', serif";
+              originalLabelSpan.style.fontWeight = '700';
+              
+              const originalContentSpan = document.createElement('span');
+              originalContentSpan.textContent = originalContent;
+              originalContentSpan.style.fontFamily = "'Noto Serif SC', serif";
+              originalContentSpan.style.fontWeight = '300';
+              
+              originalText.appendChild(originalLabelSpan);
+              originalText.appendChild(originalContentSpan);
+            }
+            
+            originalPart.appendChild(originalText);
+            sentenceContainer.appendChild(originalPart);
+            
+            const divider = document.createElement('div');
+            divider.className = 'divider';
+            sentenceContainer.appendChild(divider);
+            
+            const correctedPart = document.createElement('div');
+            correctedPart.className = 'sentence-part';
+            const correctedText = document.createElement('div');
+            correctedText.className = 'corrected-sentence';
+            correctedText.style.color = 'var(--dark-blue)';
+            
+            const correctedContent = parts[1].replace('改正：', '');
+            
+            if (correctedContent === "我们正在讨论是否应该参加这个比赛。") {
+              const firstLine = '我们正在讨论';
+              const secondLine = '是否应该参加这个比赛。';
+              
+              const correctedLabelSpan = document.createElement('span');
+              correctedLabelSpan.textContent = '改正：';
+              correctedLabelSpan.style.fontFamily = "'Noto Serif SC', serif";
+              correctedLabelSpan.style.fontWeight = '700';
+              
+              const firstLineElement = document.createElement('div');
+              firstLineElement.appendChild(correctedLabelSpan);
+              firstLineElement.appendChild(document.createTextNode(firstLine));
+              firstLineElement.style.marginBottom = '5px';
+              correctedText.appendChild(firstLineElement);
+              
+              const secondLineElement = document.createElement('div');
+              secondLineElement.textContent = secondLine;
+              secondLineElement.style.paddingLeft = '3em';
+              correctedText.appendChild(secondLineElement);
+            } else {
+              const correctedLabelSpan = document.createElement('span');
+              correctedLabelSpan.textContent = '改正：';
+              correctedLabelSpan.style.fontFamily = "'Noto Serif SC', serif";
+              correctedLabelSpan.style.fontWeight = '700';
+              
+              const correctedContentSpan = document.createElement('span');
+              correctedContentSpan.textContent = correctedContent;
+              correctedContentSpan.style.fontFamily = "'Noto Serif SC', serif";
+              correctedContentSpan.style.fontWeight = '300';
+              
+              correctedText.appendChild(correctedLabelSpan);
+              correctedText.appendChild(correctedContentSpan);
+            }
+            
+            correctedPart.appendChild(correctedText);
+            sentenceContainer.appendChild(correctedPart);
+            
+            cardElement.appendChild(sentenceContainer);
+            document.getElementById('card-text').textContent = '';
+          }
+        } else {
+          const sentenceContainer = document.createElement('div');
+          sentenceContainer.className = 'sentence-container';
+          
+          const originalText = document.createElement('div');
+          originalText.className = 'original-sentence';
+          
+          if (card.text === "我们正在讨论如果应该参加这个比赛。") {
+            const firstLine = '我们正在讨论';
+            const secondLine = '如果应该参加这个比赛。';
+            
+            const firstLineElement = document.createElement('div');
+            firstLineElement.textContent = firstLine;
+            firstLineElement.style.marginBottom = '5px';
+            originalText.appendChild(firstLineElement);
+            
+            const secondLineElement = document.createElement('div');
+            secondLineElement.textContent = secondLine;
+            originalText.appendChild(secondLineElement);
+          } else {
+            originalText.textContent = card.text;
+          }
+          
+          originalText.style.color = 'var(--light-blue)';
+          originalText.style.fontFamily = "'Noto Serif SC', serif";
+          originalText.style.fontSize = '22px';
+          sentenceContainer.appendChild(originalText);
+          
+          const divider = document.createElement('div');
+          divider.className = 'divider';
+          sentenceContainer.appendChild(divider);
+          
+          const hintText = document.createElement('div');
+          hintText.className = 'sentence-hint';
+          hintText.textContent = '💡 想一想，哪里错了？';
+          hintText.style.color = 'var(--dark-blue)';
+          hintText.style.fontFamily = "'Noto Serif SC', serif";
+          hintText.style.fontWeight = '300';
+          sentenceContainer.appendChild(hintText);
+          
+          cardElement.appendChild(sentenceContainer);
+          document.getElementById('card-text').textContent = '';
+        }
+      } else if (state.currentSet === 'collocations') {
+        // 常用搭配卡片处理
+        if (card.type === 'back') {
+          const parts = card.text.split('\n────────────────────\n');
+          if (parts.length >= 2) {
+            const translationParts = parts[0].split(' | ');
+            if (translationParts.length >= 2) {
+              const translationContainer = document.createElement('div');
+              translationContainer.className = 'translation-container';
+              
+              const translationMain = document.createElement('div');
+              translationMain.className = 'translation-main';
+              
+              const chineseText = document.createElement('div');
+              chineseText.className = 'chinese-text';
+              chineseText.textContent = translationParts[0];
+              chineseText.style.fontFamily = "'Noto Serif SC', serif";
+              chineseText.style.fontWeight = '700';
+              translationMain.appendChild(chineseText);
+              
+              const englishText = document.createElement('div');
+              englishText.className = 'english-text-back';
+              englishText.textContent = translationParts[1];
+              englishText.style.color = 'var(--dark-blue)';
+              englishText.style.fontWeight = '300';
+              englishText.style.fontFamily = 'Arial, sans-serif';
+              translationMain.appendChild(englishText);
+              
+              translationContainer.appendChild(translationMain);
+              
+              const divider = document.createElement('div');
+              divider.className = 'divider';
+              translationContainer.appendChild(divider);
+              
+              const exampleContainer = document.createElement('div');
+              exampleContainer.className = 'example-container';
+              
+              // 移除"例句："标签
+              const exampleText = document.createElement('div');
+              exampleText.className = 'example-text';
+              exampleText.style.fontFamily = "'Noto Serif SC', serif";
+              exampleText.style.fontWeight = '300';
+              exampleText.style.color = 'var(--dark-blue)';
+              
+              const exampleLines = parts[1].split('\n');
+              exampleLines.forEach(line => {
+                if (line.trim()) {
+                  const exampleLine = document.createElement('span');
+                  exampleLine.className = 'example-line';
+                  exampleLine.textContent = line;
+                  exampleText.appendChild(exampleLine);
+                }
+              });
+              
+              exampleContainer.appendChild(exampleText);
+              translationContainer.appendChild(exampleContainer);
+              cardElement.appendChild(translationContainer);
+              document.getElementById('card-text').textContent = '';
+            }
+          }
+        } else {
+          const collocationContainer = document.createElement('div');
+          collocationContainer.className = 'translation-container';
+          
+          const englishText = document.createElement('div');
+          englishText.className = 'english-text';
+          englishText.textContent = card.text;
+          englishText.style.color = 'var(--dark-blue)';
+          englishText.style.fontSize = '28px';
+          englishText.style.fontWeight = '300';
+          englishText.style.fontFamily = 'Arial, sans-serif';
+          collocationContainer.appendChild(englishText);
+          
+          const divider = document.createElement('div');
+          divider.className = 'divider';
+          collocationContainer.appendChild(divider);
+          
+          const hintText = document.createElement('div');
+          hintText.className = 'sentence-hint';
+          hintText.textContent = '💡 想一想，华文怎样说？';
+          hintText.style.color = 'var(--dark-blue)';
+          hintText.style.fontSize = '22px';
+          hintText.style.fontFamily = "'Noto Serif SC', serif";
+          hintText.style.fontWeight = '300';
+          collocationContainer.appendChild(hintText);
+          
+          cardElement.appendChild(collocationContainer);
+          document.getElementById('card-text').textContent = '';
+        }
+      } else {
+        document.getElementById('card-text').textContent = card.text;
+        document.getElementById('card-text').style.color = 'var(--dark-blue)';
+        document.getElementById('card-text').style.fontSize = '28px';
+        document.getElementById('card-text').style.fontFamily = "'Noto Serif SC', serif";
+        document.getElementById('card-text').style.fontWeight = '300';
+      }
+      
+      // 如果卡片被收藏，显示星号
+      if (state.starred.has(card.index)) {
+        const starElement = document.createElement('div');
+        starElement.className = 'card-star';
+        starElement.textContent = '★';
+        cardElement.appendChild(starElement);
+      }
+      
+      // 更新进度 - 去掉"卡片"两个字
+      document.getElementById('progress').textContent = `${state.currentIndex + 1} / ${state.cards.length}`;
+      document.querySelector('.progress-fill').style.width = `${((state.currentIndex + 1) / state.cards.length) * 100}%`;
+    }
+
+    // 下一张卡片
+    function nextCard() {
+      if (state.cards.length === 0) return;
+      state.currentIndex = (state.currentIndex + 1) % state.cards.length;
+      updateCard();
+    }
+
+    // 上一张卡片
+    function prevCard() {
+      if (state.cards.length === 0) return;
+      state.currentIndex = (state.currentIndex - 1 + state.cards.length) % state.cards.length;
+      updateCard();
+    }
+
+    // 收藏/取消收藏
+    function toggleStar() {
+      const currentCard = state.cards[state.currentIndex];
+      
+      if (state.isViewingStarred) {
+        // 在查看收藏模式中，点击收藏按钮取消整个卡片的收藏（正反两面）
+        state.starred.delete(currentCard.index);
+        
+        // 从当前收藏列表中移除该卡片的所有面
+        const cardsToRemove = state.cards.filter(card => card.index === currentCard.index);
+        cardsToRemove.forEach(cardToRemove => {
+          const indexToRemove = state.cards.findIndex(card => 
+            card.index === cardToRemove.index && card.type === cardToRemove.type);
+          if (indexToRemove !== -1) {
+            state.cards.splice(indexToRemove, 1);
+          }
+        });
+        
+        // 如果移除后没有卡片了，回到正常模式
+        if (state.cards.length === 0) {
+          state.isViewingStarred = false;
+          state.cards = [...state.originalOrder];
+          state.currentIndex = 0;
+        } else {
+          // 确保索引在有效范围内
+          state.currentIndex = state.currentIndex % state.cards.length;
+        }
+      } else {
+        // 在正常模式中，点击收藏按钮只能收藏，不能取消收藏
+        // 只有当卡片没有被收藏时，才进行收藏
+        if (!state.starred.has(currentCard.index)) {
+          state.starred.add(currentCard.index);
+        }
+        // 如果已经收藏了，就不做任何操作（不能取消收藏）
+      }
+      updateCard();
+    }
+
+    // 重置到原始顺序
+    function resetCards() {
+      state.isViewingStarred = false;
+      state.previousState = null;
+      state.cards = [...state.originalOrder];
+      state.currentIndex = 0;
+      updateCard();
+    }
+
+    // 随机排序
+    function shuffleCards() {
+      state.isViewingStarred = false;
+      state.previousState = null;
+      const shuffledPhrases = shuffleArray([...datasets[state.currentSet]]);
+      state.cards = buildCards(shuffledPhrases);
+      state.currentIndex = 0;
+      updateCard();
+    }
+
+    // 查看收藏
+    function viewStarred() {
+      if (state.starred.size === 0) {
+        return;
+      }
+      
+      state.previousState = {
+        cards: [...state.cards],
+        currentIndex: state.currentIndex,
+        isViewingStarred: state.isViewingStarred
+      };
+      
+      state.isViewingStarred = true;
+      const starredPhrases = [];
+      for (let i = 0; i < datasets[state.currentSet].length; i++) {
+        if (state.starred.has(i)) {
+          starredPhrases.push(datasets[state.currentSet][i]);
+        }
+      }
+      state.cards = buildCards(starredPhrases);
+      state.currentIndex = 0;
+      updateCard();
+    }
+
+    // 切换数据集
+    function switchDataset(setName) {
+      state.currentSet = setName;
+      state.isViewingStarred = false;
+      state.previousState = null;
+      state.cards = buildCards(datasets[setName]);
+      state.originalOrder = [...state.cards];
+      state.currentIndex = 0;
+      
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.set === setName);
+      });
+      
+      updateCard();
+    }
+
+    // 显示设计制作信息
+    function showCreatorInfo() {
+      document.getElementById('creatorInfo').classList.add('active');
+    }
+
+    // 隐藏设计制作信息
+    function hideCreatorInfo() {
+      document.getElementById('creatorInfo').classList.remove('active');
+    }
+
+    // 缩放功能
+    function setZoom(level) {
+      state.zoomLevel = Math.max(0.5, Math.min(2, level));
+      document.getElementById('appContainer').style.transform = `scale(${state.zoomLevel})`;
+      document.getElementById('zoomIndicator').textContent = `${Math.round(state.zoomLevel * 100)}%`;
+    }
+
+    function zoomIn() {
+      setZoom(state.zoomLevel + 0.1);
+    }
+
+    function zoomOut() {
+      setZoom(state.zoomLevel - 0.1);
+    }
+
+    // 初始化应用
+    function initApp() {
+      // 初始化数据
+      state.cards = buildCards(datasets.collocations);
+      state.originalOrder = [...state.cards];
+      
+      // 绑定事件
+      document.getElementById('nextBtn').addEventListener('click', nextCard);
+      document.getElementById('prevBtn').addEventListener('click', prevCard);
+      document.getElementById('starBtn').addEventListener('click', toggleStar);
+      document.getElementById('resetBtn').addEventListener('click', resetCards);
+      document.getElementById('shuffleBtn').addEventListener('click', shuffleCards);
+      document.getElementById('bookmarksBtn').addEventListener('click', viewStarred);
+      
+      // 卡片左右分区点击事件
+      document.getElementById('cardLeft').addEventListener('click', prevCard);
+      document.getElementById('cardRight').addEventListener('click', nextCard);
+      
+      document.getElementById('closeCreator').addEventListener('click', hideCreatorInfo);
+      
+      // 版权图标点击事件
+      document.getElementById('copyrightBtn').addEventListener('click', showCreatorInfo);
+      
+      // 数据集切换
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          switchDataset(this.dataset.set);
+        });
+      });
+      
+      // 缩放控制
+      document.getElementById('zoomInBtn').addEventListener('click', zoomIn);
+      document.getElementById('zoomOutBtn').addEventListener('click', zoomOut);
+      
+      // 双指捏合缩放
+      let initialDistance = 0;
+      let initialZoom = 1;
+      
+      const handleTouchStart = (e) => {
+        if (e.touches.length === 2) {
+          initialDistance = Math.hypot(
+            e.touches[0].clientX - e.touches[1].clientX,
+            e.touches[0].clientY - e.touches[1].clientY
+          );
+          initialZoom = state.zoomLevel;
+        }
+      };
+      
+      const handleTouchMove = (e) => {
+        if (e.touches.length === 2) {
+          const currentDistance = Math.hypot(
+            e.touches[0].clientX - e.touches[1].clientX,
+            e.touches[0].clientY - e.touches[1].clientY
+          );
+          
+          if (initialDistance > 0) {
+            const scale = currentDistance / initialDistance;
+            const newZoom = initialZoom * scale;
+            setZoom(Math.max(0.5, Math.min(2, newZoom)));
+          }
+        }
+      };
+      
+      const handleTouchEnd = () => {
+        initialDistance = 0;
+      };
+      
+      // 在app-container上监听触摸事件
+      const appContainer = document.getElementById('appContainer');
+      appContainer.addEventListener('touchstart', handleTouchStart);
+      appContainer.addEventListener('touchmove', handleTouchMove);
+      appContainer.addEventListener('touchend', handleTouchEnd);
+      
+      updateCard();
+    }
+
+    // 启动应用
+    window.addEventListener('load', initApp);
+  </script>
+</body>
+</html>
